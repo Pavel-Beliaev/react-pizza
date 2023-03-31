@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 import style from './Search.module.scss'
 import debounce from 'lodash.debounce'
 import {useDispatch} from "react-redux";
@@ -22,7 +22,7 @@ const Search: React.FC = () => {
         [],
     );
 
-    const changeInputHandler = (event: any) => {
+    const changeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
         updateChangeInputHandler(event.target.value);
     }
@@ -36,13 +36,13 @@ const Search: React.FC = () => {
             <input
                 ref={inputRef}
                 value={value}
-                onChange={(event) => changeInputHandler(event)}
+                onChange={changeInputHandler}
                 className={style.input}
                 placeholder='Найти пиццу...'/>
             {value &&
                 <svg
                     className={style.cleanIcon}
-                    onClick={() => cleanAndFocus()}
+                    onClick={cleanAndFocus}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 50 50"
                     width="50px"

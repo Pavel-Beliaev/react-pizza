@@ -1,9 +1,9 @@
 import React from 'react';
-import NotFounfBlock from "../components/NotFoundBlock/NotFounfBlock";
+import NotFoundBlock from "../components/NotFoundBlock/NotFounfBlock";
 
 const NotFound: React.FC = () => {
     return (
-        <NotFounfBlock/>
+        <NotFoundBlock/>
     );
 };
 

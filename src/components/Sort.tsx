@@ -27,16 +27,22 @@ const Sort: React.FC = () => {
     }
 
     useEffect(() => {
-        const handleClick = (event: any) => {
-            const bodyElement = event.srcElement.offsetParent;
-            if (bodyElement !== sortRef.current) {
+        const handleClick = (event: MouseEvent) => {
+            if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
                 setIsVisible(false);
             }
-        }
+        };
+
+        // const handleClick = (event: MouseEvent) => {
+        //     const _event = event as MouseEvent & {path: Node[]}
+        //
+        //     if (sortRef.current && !_event.path.includes(sortRef.current)) {
+        //         setIsVisible(false);
+        //     }
+        // }
         document.body.addEventListener('click', handleClick)
         return () => document.body.removeEventListener('click', handleClick)
     }, [])
-
     return (
         <div ref={sortRef} className="sort">
             <div className="sort__label">

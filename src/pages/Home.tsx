@@ -90,7 +90,7 @@ const Home: React.FC = () => {
     return (
         <div className="container">
             <div className="content__top">
-                <Categories categoryName={categoryId} categoryHandler={onChangeCategory}/>
+                <Categories categoryName={categoryId} onChangeCategory={onChangeCategory}/>
                 <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>

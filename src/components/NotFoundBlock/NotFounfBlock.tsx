@@ -1,7 +1,7 @@
 import React from 'react';
 import style from "./NotFounfBlock.module.scss";
 
-const NotFounfBlock: React.FC = () => {
+const NotFoundBlock: React.FC = () => {
     return (
         <div className={style.root}>
             <h1>
@@ -16,4 +16,4 @@ const NotFounfBlock: React.FC = () => {
     );
 };
 
-export default NotFounfBlock;
+export default NotFoundBlock;
