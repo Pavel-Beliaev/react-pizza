@@ -1,15 +1,13 @@
 import React, {useCallback, useEffect, useRef} from 'react';
-import qs from "qs";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import Categories from "../components/Categories";
-import Sort, {sortList} from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from "../components/Pagination/Pagination";
+
+import {Categories, Sort, PizzaBlock, Skeleton, Pagination} from '../components'
+
+import {PizzaItems} from "../redux/pizzas/types";
+
 import {useAppDispatch} from "../redux/store";
 import {selectPizza} from "../redux/pizzas/selectors";
-import {PizzaItems} from "../redux/pizzas/types";
 import {setCategoryId, setPage} from "../redux/filter/slice";
 import {selectFilter} from "../redux/filter/selectors";
 import {fetchPizzas} from "../redux/pizzas/asyncActions";
@@ -25,7 +23,7 @@ const Home: React.FC = () => {
 
     const onChangeCategory = useCallback((idx: number) => {
         dispatch(setCategoryId(idx));
-    },[])
+    }, [])
     const onChangePage = (page: number) => {
         dispatch(setPage(page));
     };

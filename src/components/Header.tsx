@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import pizzaLogoSvg from '../assets/img/pizza-logo.svg'
 import {Link, useLocation} from "react-router-dom";
-import Search from "./Search/Search";
 import {useSelector} from "react-redux";
 import {getSumCount, getSumPrice} from "../utils/getSum";
 import {selectCart} from "../redux/cart/selectors";
+import {Search} from '../components'
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const {pathname} = useLocation();
     const {items} = useSelector(selectCart)
     const isMount = useRef(false)
@@ -81,4 +81,3 @@ const Header: React.FC = () => {
     );
 };
 
-export default Header;

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import CartItem from "../components/CartItem";
-import CartEmpty from "../components/CartEmpty";
-import {useAppDispatch} from "../redux/store";
+
+import {CartEmpty, CartItem} from "../components";
+
 import {getSumCount, getSumPrice} from "../utils/getSum";
+import {useAppDispatch} from "../redux/store";
 import {selectCart} from "../redux/cart/selectors";
 import {clearItem} from "../redux/cart/slice";
 import {CartItemType} from "../redux/cart/types";
