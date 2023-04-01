@@ -1,18 +1,22 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {CartItemType, clearItem, selectCart} from "../redux/slices/cartSlice";
 import CartItem from "../components/CartItem";
 import CartEmpty from "../components/CartEmpty";
 import {useAppDispatch} from "../redux/store";
+import {getSumCount, getSumPrice} from "../utils/getSum";
+import {selectCart} from "../redux/cart/selectors";
+import {clearItem} from "../redux/cart/slice";
+import {CartItemType} from "../redux/cart/types";
 
 const Cart:React.FC = () => {
 
     const dispatch = useAppDispatch();
     const {items} = useSelector(selectCart)
 
-    const totalCount = items.reduce((sum: number, item: CartItemType) => sum + item.count, 0)
-    const priceTotal = items.reduce((sum: number, item: CartItemType) => sum + (item.count * item.price), 0);
+    const totalCount = getSumCount(items);
+    const priceTotal = getSumPrice(items);
+
     const onClearCart = () => {
         if (window.confirm('Clear?')) {
             dispatch(clearItem())
