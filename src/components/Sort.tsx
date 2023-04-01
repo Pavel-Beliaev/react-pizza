@@ -1,27 +1,28 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {selectSort, setSort} from "../redux/slices/filterSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {selectSort, setSort, SortPropertyEnum} from "../redux/slices/filterSlice";
+import {useSelector} from "react-redux";
+import {useAppDispatch} from "../redux/store";
 
-type SortItem = {
+type SortItems = {
     name: string,
-    sortProperty: string,
+    sortProperty: SortPropertyEnum,
 }
-export const sortList: SortItem[] = [
-    {name: 'популярности ↓', sortProperty: 'rating'},
-    {name: 'популярности ↑', sortProperty: '-rating'},
-    {name: 'цене ↓', sortProperty: 'price'},
-    {name: 'цене ↑', sortProperty: '-price'},
-    {name: 'алфавиту ↓', sortProperty: 'title'},
-    {name: 'алфавиту ↑', sortProperty: '-title'},
+export const sortList: SortItems[] = [
+    {name: 'популярности ↓', sortProperty: SortPropertyEnum.RATING_DESC},
+    {name: 'популярности ↑', sortProperty: SortPropertyEnum.RATING_ASC},
+    {name: 'цене ↓', sortProperty: SortPropertyEnum.PRICE_DESC},
+    {name: 'цене ↑', sortProperty: SortPropertyEnum.PRICE_ASC},
+    {name: 'алфавиту ↓', sortProperty: SortPropertyEnum.TITLE_DESC},
+    {name: 'алфавиту ↑', sortProperty: SortPropertyEnum.TITLE_ASC},
 ];
 const Sort: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const sort = useSelector(selectSort)
     const sortRef = useRef<HTMLDivElement>(null);
 
     const [isVisible, setIsVisible] = useState(false);
 
-    const sortHandler = (obj: SortItem) => {
+    const sortHandler = (obj: SortItems) => {
         dispatch(setSort(obj));
         setIsVisible(false);
     }
