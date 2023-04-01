@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import qs from "qs";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -20,9 +20,9 @@ const Home: React.FC = () => {
     const {items, status} = useSelector(selectPizza);
     const {categoryId, sort, page, searchValue} = useSelector(selectFilter);
 
-    const onChangeCategory = (idx: number) => {
+    const onChangeCategory = useCallback((idx: number) => {
         dispatch(setCategoryId(idx));
-    };
+    },[])
     const onChangePage = (page: number) => {
         dispatch(setPage(page));
     };
@@ -90,7 +90,7 @@ const Home: React.FC = () => {
         <div className="container">
             <div className="content__top">
                 <Categories categoryName={categoryId} onChangeCategory={onChangeCategory}/>
-                <Sort/>
+                <Sort sort={sort}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {status === 'error'

@@ -1,11 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {selectSort, setSort, SortPropertyEnum} from "../redux/slices/filterSlice";
-import {useSelector} from "react-redux";
+import { setSort, SortItem, SortPropertyEnum} from "../redux/slices/filterSlice";
 import {useAppDispatch} from "../redux/store";
 
 type SortItems = {
     name: string,
     sortProperty: SortPropertyEnum,
+}
+
+type SortProps = {
+    sort: SortItem
 }
 export const sortList: SortItems[] = [
     {name: 'популярности ↓', sortProperty: SortPropertyEnum.RATING_DESC},
@@ -15,9 +18,8 @@ export const sortList: SortItems[] = [
     {name: 'алфавиту ↓', sortProperty: SortPropertyEnum.TITLE_DESC},
     {name: 'алфавиту ↑', sortProperty: SortPropertyEnum.TITLE_ASC},
 ];
-const Sort: React.FC = () => {
+const Sort: React.FC<SortProps> = React.memo(({sort}) => {
     const dispatch = useAppDispatch();
-    const sort = useSelector(selectSort)
     const sortRef = useRef<HTMLDivElement>(null);
 
     const [isVisible, setIsVisible] = useState(false);
@@ -27,20 +29,13 @@ const Sort: React.FC = () => {
         setIsVisible(false);
     }
 
+
     useEffect(() => {
         const handleClick = (event: MouseEvent) => {
             if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
                 setIsVisible(false);
             }
         };
-
-        // const handleClick = (event: MouseEvent) => {
-        //     const _event = event as MouseEvent & {path: Node[]}
-        //
-        //     if (sortRef.current && !_event.path.includes(sortRef.current)) {
-        //         setIsVisible(false);
-        //     }
-        // }
         document.body.addEventListener('click', handleClick)
         return () => document.body.removeEventListener('click', handleClick)
     }, [])
@@ -79,8 +74,7 @@ const Sort: React.FC = () => {
                 </div>
             }
         </div>
-
     );
-};
+})
 
 export default Sort;
